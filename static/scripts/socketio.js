@@ -3,7 +3,6 @@ let userID;
 console.log('test log');
 
 socket.on('connect', function() {
-  console.log('im connected');
   socket.emit('connected', 'I\'m connected!');
 });
 

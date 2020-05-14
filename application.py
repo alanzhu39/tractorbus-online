@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for
 from flask_socketio import SocketIO, send, emit
 from single_player.round import *
+from single_player.player import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -28,6 +29,7 @@ def test_func(data):
     print(f"\n\n{data}\n\n")
 
 def start_game():
+    global r
     sheng_order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     rank_ids = [0, 0, 0, 0]
 
@@ -36,6 +38,7 @@ def start_game():
                Player("Alan", sheng_order[0]), Player("Raymond", sheng_order[0])]
     players[zj_id].set_is_zhuang_jia(True)
 
+    r = Round(players)
     while True:
         pass
         # r = Round(players)
@@ -74,4 +77,5 @@ def start_game():
 
 if __name__ == "__main__":
     num_conns = 0
+    r = None
     socketio.run(app, debug=True)
