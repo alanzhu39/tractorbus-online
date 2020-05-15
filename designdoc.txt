@@ -21,7 +21,7 @@ Functions:
 - playButton: what to do on play button click
 - clearButton: what to do on clear button click
 
-draw_functions.js
+drawFunctions.js (design inspired by big2-ai.herokuapp.com/game/)
 
 Server:
 application.py

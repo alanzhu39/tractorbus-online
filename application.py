@@ -7,6 +7,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
+testUI = True;
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -21,14 +23,14 @@ def new_connection(data):
     global num_conns
     emit('assign_id', num_conns)
     num_conns += 1
-    if num_conns == 4:
+    if num_conns == 4 and not testUI:
         start_game()
 
 @socketio.on('test-event')
 def test_func(data):
     print(f"\n\n{data}\n\n")
 
-@socket.on('make-move')
+@socketio.on('make-move')
 def make_move(move_data):
     if move_data['userID'] == r.get_current_player():
         r.set_client_input(move_data['selection'])
@@ -37,7 +39,7 @@ def make_move(move_data):
             r.set_take_back(True)
     emit('game-data', r.get_data())
 
-@socket.on('data-query')
+@socketio.on('data-query')
 def data_query(_):
     emit('game-data', r.get_data())
 

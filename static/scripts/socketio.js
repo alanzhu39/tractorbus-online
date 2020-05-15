@@ -1,6 +1,7 @@
 var socket = io();
 let userID;
 const player_selections = [];
+const myDrawer = new Drawer();
 
 console.log('test log');
 
@@ -21,7 +22,8 @@ socket.on('assign_id', (numConns) => {
 
 socket.on('game-data', (data) => {
   // TODO: import drawing functions
-  drawBoard(data);
+  myDrawer.setData(data);
+  myDrawer.draw();
 });
 
 socket.on('game-start', () => {
