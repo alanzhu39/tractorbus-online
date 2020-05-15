@@ -17,10 +17,11 @@
     <div class = "playerText" id="score" style="top:570px; left:230px">score</div>
     <div class = "playerText" id="trump-suit" style="top:300px; left:1450px">trump</div>
 
-    <div class="playerCard" id="pc3" style="left: 542.5px; width: 86px; height: 125px; visibility: visible; z-index: 2; top: 600px;">
-      <img src="/static/cards_jpeg/2C.jpg" width="86" height="125">
+    <div id="playerWrapper">
+      <div class="playerCard" id="pc3" style="left: 657px; width: 86px; height: 125px; visibility: visible; z-index: 2; top: 600px;">
+        <img src="/static/cards_jpeg/2C.jpg" width="86" height="125">
+      </div>
     </div>
-
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='scripts/drawFunctions.js') }}"></script>

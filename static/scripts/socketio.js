@@ -1,7 +1,7 @@
 var socket = io();
 let userID;
-const player_selections = [];
-const myDrawer = new Drawer();
+const playerSelections = [];
+const myDrawer;
 
 console.log('test log');
 
@@ -16,6 +16,7 @@ socket.on('message', (data) => {
 socket.on('assign_id', (numConns) => {
   if (typeof userID == "undefined") {
     userID = numConns;
+    myDrawer = new Drawer(userID, playerSelections);
   }
   console.log(numConns);
 });
@@ -27,25 +28,23 @@ socket.on('game-data', (data) => {
 });
 
 socket.on('game-start', () => {
-  setInterval(queryData() {
-    socket.emit('data-query', 'Asking for data');
-  }, 17);
+  setInterval(() => { socket.emit('data-query', 'Asking for data'); }, 17);
 });
 
 function testFunc() {
-  socket.emit('test-event', {'stuff': [1,2,3]});
+  myDrawer.drawTurn();
 }
 
 function cardClick(index) {
   // TODO: create index detection, if index is already in selections remove it
-  player_selections.push(index)
+  playerSelections.push(index)
 }
 
 function playButton() {
   socket.emit('make-move', {'userID': userID,
-                            'selection': player_selections});
+                            'selection': playerSelections});
 }
 
 function clearButton() {
-  player_selections.length = 0;
+  playerSelections.length = 0;
 }

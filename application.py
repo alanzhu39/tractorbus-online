@@ -28,7 +28,7 @@ def new_connection(data):
 
 @socketio.on('test-event')
 def test_func(data):
-    print(data['stuff'])
+    print(type(data['stuff']))
     send(data['stuff'])
 
 @socketio.on('make-move')

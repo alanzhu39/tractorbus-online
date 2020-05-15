@@ -17,7 +17,7 @@ class Card(object):
 
     ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     suits = ['clubs', 'diamonds', 'hearts', 'spades']
-    suit_map = {'clubs': '\u2663', 'diamonds': '\u2666', 'hearts': '\u2665', 'spades': '\u2660'}
+    suit_map = {'clubs': 'C', 'diamonds': 'D', 'hearts': 'H', 'spades': 'S'}
 
     def __init__(self, rank, suit, ID=0, is_big_joker=False, is_small_joker=False):
         self.rank = rank

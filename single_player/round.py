@@ -351,7 +351,8 @@ class Round(object):
     def get_data(self):
         data = {}
         for i in range(4):
-            data[i] = [self.players[i].get_hand(), self.cards_played[i]]
+            data[i] = [[str(x) for x in self.players[i].get_hand()], \
+                        [str(x) for x in self.cards_played[i]]]
         data['clear'] = self.clear
         data['di_pai'] = self.di_pai
         data['game_start'] = self.game_start

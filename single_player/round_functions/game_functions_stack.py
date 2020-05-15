@@ -75,7 +75,7 @@ def play_round(self):
     return self.attacker_points
 
 
-def deal(self, test=False):
+def deal(self, test=True):
     self.deck.shuffle()
     current_drawer = self.zhuang_jia_id
     while len(self.deck) > self.num_di_pai:
