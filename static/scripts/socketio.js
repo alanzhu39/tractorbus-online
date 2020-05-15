@@ -10,7 +10,7 @@ socket.on('connect', function() {
 });
 
 socket.on('message', (data) => {
-  console.log(`Message received: ${data}`);
+  console.log(data);
 });
 
 socket.on('assign_id', (numConns) => {
@@ -33,7 +33,7 @@ socket.on('game-start', () => {
 });
 
 function testFunc() {
-  socket.emit('test-event', 'this is a test');
+  socket.emit('test-event', {'stuff': [1,2,3]});
 }
 
 function cardClick(index) {

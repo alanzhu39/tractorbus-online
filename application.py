@@ -28,7 +28,8 @@ def new_connection(data):
 
 @socketio.on('test-event')
 def test_func(data):
-    print(f"\n\n{data}\n\n")
+    print(data['stuff'])
+    send(data['stuff'])
 
 @socketio.on('make-move')
 def make_move(move_data):
