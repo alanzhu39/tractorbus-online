@@ -80,7 +80,7 @@ class Drawer {
       const xPos = (this.boardWidth - (handLen - 1)*this.backDelta
                           - this.backWidth)/2 + i*this.backDelta;
       const yPos = 0;
-      this.ctx.drawImage(backOfCardHor, xPos, yPos, this.backHeight, this.backWidth);
+      this.ctx.drawImage(backOfCardHor, xPos, yPos, this.backWidth, this.backHeight);
     }
     // left
     handLen = this.data[(this.data['current_player'] + 4 - this.userID + 3) % 4][0].length;
@@ -92,7 +92,7 @@ class Drawer {
   }
 
   drawPlayed() {
-
+    
   }
 
   drawTurn() {
@@ -107,7 +107,9 @@ class Drawer {
 
   drawDeck() {
     if (this.data['di_pai']) {
-
+      const backOfCard = new Image();
+      backOfCard.src = '/static/cards_png/back.jpg';
+      this.ctx.drawImage(backOfCard, 55, 570, this.backWidth, this.backHeight);
     }
   }
 
