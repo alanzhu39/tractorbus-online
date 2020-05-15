@@ -27,7 +27,8 @@ socket.on('game-data', (data) => {
   myDrawer.draw();
 });
 
-socket.on('game-start', () => {
+socket.on('game-start', (data) => {
+  console.log(data);
   setInterval(() => { socket.emit('data-query', 'Asking for data'); }, 17);
 });
 

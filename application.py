@@ -7,8 +7,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-testUI = True;
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -23,7 +21,8 @@ def new_connection(data):
     global num_conns
     emit('assign_id', num_conns)
     num_conns += 1
-    if num_conns == 4 and not testUI:
+    if num_conns == 4:
+        emit('game-start', 'Game started!')
         start_game()
 
 @socketio.on('test-event')

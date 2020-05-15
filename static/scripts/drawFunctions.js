@@ -4,11 +4,11 @@ class Drawer {
     this.selected = selected;
     this.data;
     this.cardHeight = 125;
-    this.cardWidth = 85;
+    this.cardWidth = 86;
     this.cardDeltaX = 30;
     this.cardY = 600;
     this.backHeight = 100;
-    this.backWidth = 68;
+    this.backWidth = 68.8;
     this.backDelta = 15;
     this.boardHeight = 800;
     this.boardWidth = 1400;
@@ -46,7 +46,7 @@ class Drawer {
     const myHand = this.data[(this.data['current_player'] + 4 - this.userID) % 4][0];
     for (var i = 0; i < myHand.length; i++) {
       const card = document.createElement('div');
-      card.class = 'playerCard';
+      card.className = 'playerCard';
       card.onclick = `cardClick(${i})`;
       const yPos = (this.selected.includes(i)) ? this.cardY + this.selectDelta : this.cardY;
       card.style.top = String(yPos) + 'px';
@@ -58,7 +58,7 @@ class Drawer {
       card.style.zIndex = String(i);
       card.innerHTML = ("<img src='/static/cards_png/" + String(myHand[i]) + ".png' width='"
                   + String(this.cardWidth) + "' height='" + String(this.cardHeight) + "'/>");
-      document.getElementById('playerWrapper').appendChild(card);
+      document.body.appendChild(card);
     }
   }
 
@@ -105,7 +105,7 @@ class Drawer {
     // right
     played = this.data[(this.data['current_player'] + 4 - this.userID + 1) % 4][1];
     for (var i = 0; i < played.length; i++) {
-      const xPos = this.boardWidth - (played.length - 1)*this.backDelta - this.backWidth
+      const xPos = this.boardWidth - this.backHeight - (played.length - 1)*this.backDelta - this.backWidth
                   - this.turnRadius - this.playedDelta + i*this.backDelta;
       const yPos = (this.backHeight + this.cardY - this.backHeight)/2;
       playedCard.src = `/static/cards_png/${played[i]}.png`;
@@ -123,7 +123,7 @@ class Drawer {
     // left
     played = this.data[(this.data['current_player'] + 4 - this.userID + 3) % 4][1];
     for (var i = 0; i < played.length; i++) {
-      const xPos = this.backHeight + this.playedDelta + i*this.backDelta;
+      const xPos = this.backHeight + this.turnRadius + this.playedDelta + i*this.backDelta;
       const yPos = (this.backHeight + this.cardY - this.backHeight)/2;
       playedCard.src = `/static/cards_png/${played[i]}.png`;
       this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
