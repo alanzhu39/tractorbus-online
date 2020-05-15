@@ -1,6 +1,6 @@
 class Drawer {
-  constructor(userID, selected) {
-    this.userID = userID;
+  constructor(selected) {
+    this.userID;
     this.selected = selected;
     this.data;
     this.cardHeight = 125;
@@ -9,12 +9,17 @@ class Drawer {
     this.cardY = 600;
     this.backHeight = 100;
     this.backWidth = 68;
+    this.backDelta = 15;
     this.boardHeight = 800;
     this.boardWidth = 1400;
     this.selectDelta = 20;
     this.playedDelta = 15;
     this.turnRadius = 45;
     this.ctx = document.getElementById('gameCanvas').getContext('2d');
+  }
+
+  setID(userID) {
+    this.userID = userID;
   }
 
   setData(data) {
@@ -38,8 +43,8 @@ class Drawer {
     for (card of document.getElementsByClassname('playerCard')) {
       card.remove();
     }
-    myHand = this.data[(this.data['current_player'] + 4 - this.userID) % 4][0];
-    for (int i = 0; i < myHand.length; i++) {
+    const myHand = this.data[(this.data['current_player'] + 4 - this.userID) % 4][0];
+    for (var i = 0; i < myHand.length; i++) {
       const card = document.createElement('div');
       div.class = 'playerCard';
       div.onclick = `cardClick(${i})`;
@@ -58,7 +63,32 @@ class Drawer {
   }
 
   drawOpponents() {
-
+    const backOfCard = new Image();
+    backOfCard.src = '/static/cards_png/back.jpg';
+    const backOfCardHor = new Image();
+    backofCardHor.src = '/static/cards_png/back-hor.jpg';
+    // right
+    let handLen = this.data[(this.data['current_player'] + 4 - this.userID + 1) % 4][0].length;
+    for (var i = 0; i < handLen; i++) {
+      const xPos = this.boardWidth - this.backHeight;
+      const yPos = (570 - (handLen - 1)*this.backDelta - this.backWidth)/2 + i*this.backDelta;
+      this.ctx.drawImage(backOfCardHor, xPos, yPos, this.backHeight, this.backWidth);
+    }
+    // across
+    handLen = this.data[(this.data['current_player'] + 4 - this.userID + 2) % 4][0].length;
+    for (var i = 0; i < handLen; i++) {
+      const xPos = (this.boardWidth - (handLen - 1)*this.backDelta
+                          - this.backWidth)/2 + i*this.backDelta;
+      const yPos = 0;
+      this.ctx.drawImage(backOfCardHor, xPos, yPos, this.backHeight, this.backWidth);
+    }
+    // left
+    handLen = this.data[(this.data['current_player'] + 4 - this.userID + 3) % 4][0].length;
+    for (var i = 0; i < handLen; i++) {
+      const xPos = 0;
+      const yPos = (570 - (handLen - 1)*this.backDelta - this.backWidth)/2 + i*this.backDelta;
+      this.ctx.drawImage(backOfCardHor, xPos, yPos, this.backHeight, this.backWidth);
+    }
   }
 
   drawPlayed() {

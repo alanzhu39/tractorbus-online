@@ -1,7 +1,7 @@
 var socket = io();
 let userID;
 const playerSelections = [];
-const myDrawer;
+const myDrawer = new Drawer(playerSelections);
 
 console.log('test log');
 
@@ -16,7 +16,7 @@ socket.on('message', (data) => {
 socket.on('assign_id', (numConns) => {
   if (typeof userID == "undefined") {
     userID = numConns;
-    myDrawer = new Drawer(userID, playerSelections);
+    myDrawer.setID(userID);
   }
   console.log(numConns);
 });
@@ -32,7 +32,7 @@ socket.on('game-start', () => {
 });
 
 function testFunc() {
-  myDrawer.drawTurn();
+  myDrawer.drawOpponents();
 }
 
 function cardClick(index) {
