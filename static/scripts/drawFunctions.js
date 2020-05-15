@@ -31,31 +31,31 @@ class Drawer {
       return;
     }
     this.ctx.clearRect(0, 0, this.boardWidth, this.boardHeight);
+    this.drawTurn();
     this.drawPlayerCards();
     this.drawOpponents();
     this.drawPlayed();
-    this.drawTurn();
     this.drawDeck();
     this.drawStats();
   }
 
   drawPlayerCards() {
-    for (card of document.getElementsByClassname('playerCard')) {
+    for (card of document.getElementsByClassName('playerCard')) {
       card.remove();
     }
     const myHand = this.data[(this.data['current_player'] + 4 - this.userID) % 4][0];
     for (var i = 0; i < myHand.length; i++) {
       const card = document.createElement('div');
-      div.class = 'playerCard';
-      div.onclick = `cardClick(${i})`;
+      card.class = 'playerCard';
+      card.onclick = `cardClick(${i})`;
       const yPos = (this.selected.includes(i)) ? this.cardY + this.selectDelta : this.cardY;
-      div.style.top = String(yPos) + 'px';
-      div.style.width = String(this.cardWidth) + 'px';
-      div.style.height = String(this.cardHeight) + 'px';
-      div.style.left = String((this.boardWidth - (myHand.length - 1)*this.cardDeltaX
+      card.style.top = String(yPos) + 'px';
+      card.style.width = String(this.cardWidth) + 'px';
+      card.style.height = String(this.cardHeight) + 'px';
+      card.style.left = String((this.boardWidth - (myHand.length - 1)*this.cardDeltaX
                           - this.cardWidth)/2 + i*this.cardDeltaX) + 'px';
-      div.style.visibility = "visible";
-      div.style.zIndex = String(i);
+      card.style.visibility = "visible";
+      card.style.zIndex = String(i);
       card.innerHTML = ("<img src='/static/cards_png/" + String(myHand[i]) + ".png' width='"
                   + String(this.cardWidth) + "' height='" + String(this.cardHeight) + "'/>");
       document.getElementById('playerWrapper').appendChild(card);
@@ -66,7 +66,7 @@ class Drawer {
     const backOfCard = new Image();
     backOfCard.src = '/static/cards_png/back.jpg';
     const backOfCardHor = new Image();
-    backofCardHor.src = '/static/cards_png/back-hor.jpg';
+    backOfCardHor.src = '/static/cards_png/back-hor.jpg';
     // right
     let handLen = this.data[(this.data['current_player'] + 4 - this.userID + 1) % 4][0].length;
     for (var i = 0; i < handLen; i++) {
@@ -149,9 +149,9 @@ class Drawer {
   }
 
   drawStats() {
-    scoreText = document.getElementsById('score');
+    const scoreText = document.getElementById('score');
     scoreText.innerHTML = "Attacker points: " + String(this.data['attacker_points']);
-    suitText = document.getElementsById('trump-suit');
+    const suitText = document.getElementById('trump-suit');
     suitText.innerHTML = "Trump suit: " + String(this.data['trump_suit']);
   }
 }

@@ -33,14 +33,14 @@ socket.on('game-start', () => {
 
 function testFunc() {
   const testData = {0: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
-      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8S']],
+      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8H']],
                     1: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
-      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8S']],
+      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8H']],
                     2: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
-      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8S']],
+      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8H']],
                     3: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
-      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8S']],
-                    'clear': True, 'di_pai': True, 'game_start': True, 'attacker_points': 25,
+      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8H']],
+                    'clear': true, 'di_pai': true, 'game_start': true, 'attacker_points': 25,
                     'trump_suit': 'test suit', 'current_player': 1};
   myDrawer.setData(testData);
   myDrawer.draw();
