@@ -349,12 +349,15 @@ class Round(object):
         return self.current_player
 
     def get_data(self):
-        data = ''
-        data += str(0) + ':' + str(self.players[0].get_hand()) + ':' + str(self.cards_played[0])
-        for i in range(3):
-            data += ':' + str(i+1) + ':' + str(self.players[i+1].get_hand()) + ':' + str(self.cards_played[i+1])
-        data += ':' + str(self.clear) + ':' + str(self.di_pai) + ':' + str(self.game_start) \
-                + ':' + str(self.attacker_points) + ':' + str(self.trump_suit) + ':' + str(self.current_player)
+        data = {}
+        for i in range(4):
+            data[i] = [self.players[i].get_hand(), self.cards_played[i]]
+        data['clear'] = self.clear
+        data['di_pai'] = self.di_pai
+        data['game_start'] = self.game_start
+        data['attacker_points'] = self.attacker_points
+        data['trump_suit'] = self.trump_suit
+        data['current_player'] = self.current_player
         return data
 
     def set_client_input(self, input):

@@ -1,5 +1,7 @@
 var socket = io();
 let userID;
+const player_selections = [];
+
 console.log('test log');
 
 socket.on('connect', function() {
@@ -17,6 +19,31 @@ socket.on('assign_id', (numConns) => {
   console.log(numConns);
 });
 
+socket.on('game-data', (data) => {
+  // TODO: import drawing functions
+  drawBoard(data);
+});
+
+socket.on('game-start', () => {
+  setInterval(queryData() {
+    socket.emit('data-query', 'Asking for data');
+  }, 17);
+});
+
 function testFunc() {
   socket.emit('test-event', 'this is a test');
+}
+
+function cardClick(index) {
+  // TODO: create index detection, if index is already in selections remove it
+  player_selections.push(index)
+}
+
+function playButton() {
+  socket.emit('make-move', {'userID': userID,
+                            'selection': player_selections});
+}
+
+function clearButton() {
+  player_selections.length = 0;
 }

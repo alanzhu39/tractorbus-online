@@ -1,0 +1,40 @@
+Client:
+index.html
+
+main.css
+
+socketio.js
+Variables:
+- socket: current socket
+- userID: ID of user, ranges from 0 to 3
+- player_selections: array of selected indices
+
+Event Listeners:
+- connect: emits connected message, which triggers ID assignment
+- message: logs received message
+- assign_id: assigns userID if not assigned already
+- game-data: receives game data and draws board with data
+- game-start: on game start, begins to query for data every 17 milliseconds
+
+Functions:
+- cardClick: what to do onclick of a card
+- playButton: what to do on play button click
+- clearButton: what to do on clear button click
+
+draw_functions.js
+
+Server:
+application.py
+Variables:
+- app: Flask app
+- secret key: secret!
+- socketio: socket
+
+Event Listeners:
+- message: prints message data
+- connected: detects when a new user is connected and assigns user ID
+- make-move: handles moves sent by players
+- data-query: sends back game data in response to queries from users
+
+Functions:
+- start_game: starts the game

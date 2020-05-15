@@ -19,14 +19,27 @@ def message(data):
 @socketio.on('connected')
 def new_connection(data):
     global num_conns
-    num_conns += 1
     emit('assign_id', num_conns)
+    num_conns += 1
     if num_conns == 4:
         start_game()
 
 @socketio.on('test-event')
 def test_func(data):
     print(f"\n\n{data}\n\n")
+
+@socket.on('make-move')
+def make_move(move_data):
+    if move_data['userID'] == r.get_current_player():
+        r.set_client_input(move_data['selection'])
+    elif move_data['userID'] == r.get_last_player() and r.get_current_player() != 5:
+        if move_data['selection'] == ['b']:
+            r.set_take_back(True)
+    emit('game-data', r.get_data())
+
+@socket.on('data-query')
+def data_query(_):
+    emit('game-data', r.get_data())
 
 def start_game():
     global r
@@ -38,42 +51,40 @@ def start_game():
                Player("Alan", sheng_order[0]), Player("Raymond", sheng_order[0])]
     players[zj_id].set_is_zhuang_jia(True)
 
-    r = Round(players)
     while True:
-        pass
-        # r = Round(players)
-        # pts = r.play_round()
-        #
-        # if pts == 0:
-        #     # increase trump rank of players[zj_id] and players[(zj_id+2)%4] by 3
-        #     rank_ids[zj_id] += 3
-        #     rank_ids[(zj_id + 2) % 4] += 3
-        #     zj_id = (zj_id + 2) % 4
-        # elif pts < 40:
-        #     # increase trump rank of players[zj_id] and players[(zj_id+2)%4] by 2
-        #     rank_ids[zj_id] += 2
-        #     rank_ids[(zj_id + 2) % 4] += 2
-        #     zj_id = (zj_id + 2) % 4
-        # elif pts < 80:
-        #     # increase trump rank of players[zj_id] and players[(zj_id+2)%4] by 1
-        #     rank_ids[zj_id] += 1
-        #     rank_ids[(zj_id + 2) % 4] += 1
-        #     zj_id = (zj_id + 2) % 4
-        # else:
-        #     num_shengs = (pts - 80) // 40
-        #     # increase trump rank of players[(zj_id+1)%4] and players[(zj_id+3)%4] by num_shengs
-        #     rank_ids[(zj_id + 1) % 4] += num_shengs
-        #     rank_ids[(zj_id + 3) % 4] += num_shengs
-        #     zj_id = (zj_id + 1) % 4
-        #
-        # for i in range(4):
-        #     players[i].set_is_zhuang_jia(False)
-        #     players[i].set_trump_rank(sheng_order[rank_ids[i]])
-        # players[zj_id].set_is_zhuang_jia(True)
-        #
-        # if rank_ids[zj_id] >= len(sheng_order):
-        #     print(players[zj_id].get_name() + ' and ' + players[(zj_id + 2) % 4].get_name() + 'win!')
-        #     break
+        r = Round(players)
+        pts = r.play_round()
+
+        if pts == 0:
+            # increase trump rank of players[zj_id] and players[(zj_id+2)%4] by 3
+            rank_ids[zj_id] += 3
+            rank_ids[(zj_id + 2) % 4] += 3
+            zj_id = (zj_id + 2) % 4
+        elif pts < 40:
+            # increase trump rank of players[zj_id] and players[(zj_id+2)%4] by 2
+            rank_ids[zj_id] += 2
+            rank_ids[(zj_id + 2) % 4] += 2
+            zj_id = (zj_id + 2) % 4
+        elif pts < 80:
+            # increase trump rank of players[zj_id] and players[(zj_id+2)%4] by 1
+            rank_ids[zj_id] += 1
+            rank_ids[(zj_id + 2) % 4] += 1
+            zj_id = (zj_id + 2) % 4
+        else:
+            num_shengs = (pts - 80) // 40
+            # increase trump rank of players[(zj_id+1)%4] and players[(zj_id+3)%4] by num_shengs
+            rank_ids[(zj_id + 1) % 4] += num_shengs
+            rank_ids[(zj_id + 3) % 4] += num_shengs
+            zj_id = (zj_id + 1) % 4
+
+        for i in range(4):
+            players[i].set_is_zhuang_jia(False)
+            players[i].set_trump_rank(sheng_order[rank_ids[i]])
+        players[zj_id].set_is_zhuang_jia(True)
+
+        if rank_ids[zj_id] >= len(sheng_order):
+            print(players[zj_id].get_name() + ' and ' + players[(zj_id + 2) % 4].get_name() + 'win!')
+            break
 
 if __name__ == "__main__":
     num_conns = 0
