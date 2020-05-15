@@ -22,7 +22,7 @@ def new_connection(data):
     emit('assign_id', num_conns)
     num_conns += 1
     if num_conns == 4:
-        emit('game-start', 'Game started!')
+        emit('game-start', 'Game started!', broadcast=True)
         start_game()
 
 @socketio.on('test-event')

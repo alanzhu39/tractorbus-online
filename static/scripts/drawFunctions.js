@@ -40,7 +40,7 @@ class Drawer {
   }
 
   drawPlayerCards() {
-    for (card of document.getElementsByClassName('playerCard')) {
+    for (var card of document.getElementsByClassName('playerCard')) {
       card.remove();
     }
     const myHand = this.data[(this.data['current_player'] + 4 - this.userID) % 4][0];

@@ -3,8 +3,6 @@ let userID;
 const playerSelections = [];
 const myDrawer = new Drawer(playerSelections);
 
-console.log('test log');
-
 socket.on('connect', function() {
   socket.emit('connected', 'I\'m connected!');
 });
@@ -30,6 +28,10 @@ socket.on('game-data', (data) => {
 socket.on('game-start', (data) => {
   console.log(data);
   setInterval(() => { socket.emit('data-query', 'Asking for data'); }, 17);
+});
+
+socket.on('test-event', (data) => {
+  console.log(data);
 });
 
 function testFunc() {
