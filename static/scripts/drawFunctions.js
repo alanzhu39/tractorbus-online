@@ -92,7 +92,42 @@ class Drawer {
   }
 
   drawPlayed() {
-    
+    const playedCard = new Image();
+    // player
+    let played = this.data[(this.data['current_player'] + 4 - this.userID) % 4][1];
+    for (var i = 0; i < played.length; i++) {
+      const xPos = (this.boardWidth - (played.length - 1)*this.backDelta
+                          - this.backWidth)/2 + i*this.backDelta;
+      const yPos = this.cardY - this.turnRadius - this.playedDelta - this.backHeight;
+      playedCard.src = `/static/cards_png/${played[i]}.png`;
+      this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
+    }
+    // right
+    played = this.data[(this.data['current_player'] + 4 - this.userID + 1) % 4][1];
+    for (var i = 0; i < played.length; i++) {
+      const xPos = this.boardWidth - (played.length - 1)*this.backDelta - this.backWidth
+                  - this.turnRadius - this.playedDelta + i*this.backDelta;
+      const yPos = (this.backHeight + this.cardY - this.backHeight)/2;
+      playedCard.src = `/static/cards_png/${played[i]}.png`;
+      this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
+    }
+    // across
+    played = this.data[(this.data['current_player'] + 4 - this.userID + 2) % 4][1];
+    for (var i = 0; i < played.length; i++) {
+      const xPos = (this.boardWidth - (played.length - 1)*this.backDelta
+                          - this.backWidth)/2 + i*this.backDelta;
+      const yPos = this.backHeight + this.turnRadius + this.playedDelta;
+      playedCard.src = `/static/cards_png/${played[i]}.png`;
+      this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
+    }
+    // left
+    played = this.data[(this.data['current_player'] + 4 - this.userID + 3) % 4][1];
+    for (var i = 0; i < played.length; i++) {
+      const xPos = this.backHeight + this.playedDelta + i*this.backDelta;
+      const yPos = (this.backHeight + this.cardY - this.backHeight)/2;
+      playedCard.src = `/static/cards_png/${played[i]}.png`;
+      this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
+    }
   }
 
   drawTurn() {

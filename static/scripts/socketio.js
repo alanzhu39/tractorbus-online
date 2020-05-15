@@ -32,7 +32,27 @@ socket.on('game-start', () => {
 });
 
 function testFunc() {
-  myDrawer.drawOpponents();
+  const testData = {0: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
+      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8S']],
+                    1: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
+      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8S']],
+                    2: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
+      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8S']],
+                    3: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
+      '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8S']],
+                    'clear': True, 'di_pai': True, 'game_start': True, 'attacker_points': 25,
+                    'trump_suit': 'test suit', 'current_player': 1};
+  myDrawer.setData(testData);
+  myDrawer.draw();
+}
+
+function testDraw() {
+  const context = document.getElementById('gameCanvas').getContext('2d');
+  const backOfCard = new Image();
+  backOfCard.src = '/static/cards_png/back.jpg';
+  context.drawImage(backOfCard, 0, 0, 68, 100);
+  backOfCard.src = '/static/cards_png/2C.png';
+  context.drawImage(backOfCard, 200, 0, 85, 125);
 }
 
 function cardClick(index) {
