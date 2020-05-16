@@ -1,11 +1,12 @@
 import time
+import os
 from flask import Flask, render_template, url_for
 from flask_socketio import SocketIO, send, emit
 from single_player.round import *
 from single_player.player import *
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
+app.config['SECRET_KEY'] = os.environ.get('SECRET')
 socketio = SocketIO(app)
 
 testUI = False;
