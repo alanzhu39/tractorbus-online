@@ -97,4 +97,4 @@ def start_game():
 if __name__ == "__main__":
     num_conns = 0
     r = None
-    socketio.run(app, debug=True)
+    socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
