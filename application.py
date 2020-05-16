@@ -1,3 +1,4 @@
+import time
 from flask import Flask, render_template, url_for
 from flask_socketio import SocketIO, send, emit
 from single_player.round import *
@@ -40,7 +41,8 @@ def make_move(move_data):
     elif move_data['userID'] == r.get_last_player() and r.get_current_player() != 5:
         if move_data['selection'] == ['b']:
             r.set_take_back(True)
-    emit('game-data', r.get_data())
+    time.sleep(0.1)
+    emit('game-data', r.get_data(), broadcast = True)
 
 @socketio.on('data-query')
 def data_query(_):

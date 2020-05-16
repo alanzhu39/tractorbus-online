@@ -56,6 +56,12 @@ function testDraw() {
   context.drawImage(backOfCard, 200, 0, 85, 125);
 }
 
+function testClearCards() {
+  for (var i = 0; i < 25; i++) {
+    document.getElementById(String(i)).remove();
+  }
+}
+
 function cardClick(index) {
   if (!playerSelections.includes(index)) {
     playerSelections.push(index);
@@ -78,6 +84,7 @@ function playButton() {
 
 function clearButton() {
   playerSelections.length = 0;
+  myDrawer.draw();
 }
 
 function passButton() {
