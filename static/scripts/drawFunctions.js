@@ -1,8 +1,6 @@
 class Drawer {
-  constructor(selected) {
-    this.userID;
-    this.selected = selected;
-    this.data;
+  constructor(selections) {
+    this.selections = selections;
     this.cardHeight = 125;
     this.cardWidth = 86;
     this.cardDeltaX = 30;
@@ -47,8 +45,11 @@ class Drawer {
     for (var i = 0; i < myHand.length; i++) {
       const card = document.createElement('div');
       card.className = 'playerCard';
-      card.onclick = `cardClick(${i})`;
-      const yPos = (this.selected.includes(i)) ? this.cardY + this.selectDelta : this.cardY;
+      const j = i;
+      card.onclick = () => {
+        cardClick(j);
+      };
+      const yPos = (this.selections.includes(i)) ? (this.cardY - this.selectDelta) : this.cardY;
       card.style.top = String(yPos) + 'px';
       card.style.width = String(this.cardWidth) + 'px';
       card.style.height = String(this.cardHeight) + 'px';

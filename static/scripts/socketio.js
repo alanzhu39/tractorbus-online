@@ -46,7 +46,7 @@ function testFunc() {
                     'clear': true, 'di_pai': true, 'game_start': true, 'attacker_points': 25,
                     'trump_suit': 'test suit', 'current_player': 1};
   myDrawer.setData(testData);
-  myDrawer.draw();
+  setInterval(() => {myDrawer.draw();}, 34);
 }
 
 function testDraw() {
@@ -59,8 +59,17 @@ function testDraw() {
 }
 
 function cardClick(index) {
-  // TODO: create index detection, if index is already in selections remove it
-  playerSelections.push(index)
+  if (!playerSelections.includes(index)) {
+    playerSelections.push(index);
+  } else {
+    for (var i = 0; i < playerSelections.length; i++) {
+      if (playerSelections[i] == index) {
+        playerSelections.splice(i, 1);
+        break;
+      }
+    }
+  }
+  console.log(playerSelections);
 }
 
 function playButton() {
