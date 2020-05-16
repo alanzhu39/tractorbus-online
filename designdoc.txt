@@ -1,3 +1,10 @@
+Overview:
+Begins with clients connecting to server, at which point they are assigned an ID.
+When all clients are connected the game starts, with each player submitting a data query to draw initial data.
+All card selection is handled within the client (eg. card hovering).
+When play/pass/takeback button is pressed, corresponding data is sent to server through make-move event.
+On each make-move, the server broadcasts the new game data to each client to update hands.
+
 Client:
 index.html
 
@@ -20,8 +27,20 @@ Functions:
 - cardClick: what to do onclick of a card
 - playButton: what to do on play button click
 - clearButton: what to do on clear button click
+- testFunc: creates and draws test data
+- passButton: passes ['space'] as player move
+- takeBack: passes ['b'] as player move
 
 drawFunctions.js (design inspired by big2-ai.herokuapp.com/game/)
+- constructor: sets variables for various dimensions
+- setID: userID setter, necessary for determining which cards to draw where
+- setData: sets game data
+- draw: draws the game
+- drawPlayerCards: draws the user's cards
+- drawOpponents: draws the opponents cards (on canvas)
+- drawPlayed: draws the played cards (on canvas)
+- drawTurn: draws the turn marker (on canvas)
+- drawStats: draws score and trump suit
 
 Server:
 application.py
