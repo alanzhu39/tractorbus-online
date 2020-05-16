@@ -203,8 +203,7 @@ def get_player_input(self, curr_player):
     if response == ['space']:
         return 'space'
 
-    integer_list = [int(s) for s in response if s.isdigit()]
-    return integer_list
+    return response
 
 
 def is_valid_input(self, player, response):

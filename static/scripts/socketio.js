@@ -20,14 +20,12 @@ socket.on('assign_id', (numConns) => {
 });
 
 socket.on('game-data', (data) => {
-  // TODO: import drawing functions
   myDrawer.setData(data);
   myDrawer.draw();
 });
 
 socket.on('game-start', (data) => {
-  console.log(data);
-  setInterval(() => { socket.emit('data-query', 'Asking for data'); }, 17);
+  setTimeout(() => { socket.emit('data-query', 'Asking for data'); }, 3000);
 });
 
 socket.on('test-event', (data) => {
@@ -46,7 +44,7 @@ function testFunc() {
                     'clear': true, 'di_pai': true, 'game_start': true, 'attacker_points': 25,
                     'trump_suit': 'test suit', 'current_player': 1};
   myDrawer.setData(testData);
-  setInterval(() => {myDrawer.draw();}, 34);
+  myDrawer.draw();
 }
 
 function testDraw() {
@@ -75,8 +73,19 @@ function cardClick(index) {
 function playButton() {
   socket.emit('make-move', {'userID': userID,
                             'selection': playerSelections});
+  playerSelections.length = 0;
 }
 
 function clearButton() {
   playerSelections.length = 0;
+}
+
+function passButton() {
+  socket.emit('make-move', {'userID': userID,
+                            'selection': ['space']});
+}
+
+function takeBack() {
+  socket.emit('make-move', {'userID': userID,
+                            'selection': ['b']});
 }

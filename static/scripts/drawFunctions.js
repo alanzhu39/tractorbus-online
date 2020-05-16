@@ -48,6 +48,8 @@ class Drawer {
       const j = i;
       card.onclick = () => {
         cardClick(j);
+        const y = (this.selections.includes(j)) ? (this.cardY - this.selectDelta) : this.cardY;
+        card.style.top = String(y) + 'px';
       };
       const yPos = (this.selections.includes(i)) ? (this.cardY - this.selectDelta) : this.cardY;
       card.style.top = String(yPos) + 'px';

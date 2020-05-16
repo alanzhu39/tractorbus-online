@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-testUI = True;
+testUI = False;
 
 @app.route('/')
 def index():
@@ -35,7 +35,8 @@ def test_func(data):
 @socketio.on('make-move')
 def make_move(move_data):
     if move_data['userID'] == r.get_current_player():
-        r.set_client_input(move_data['selection'])
+        if move_data['selection'] != ['b']:
+            r.set_client_input(move_data['selection'])
     elif move_data['userID'] == r.get_last_player() and r.get_current_player() != 5:
         if move_data['selection'] == ['b']:
             r.set_take_back(True)
