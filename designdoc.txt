@@ -30,6 +30,7 @@ Functions:
 - testFunc: creates and draws test data
 - passButton: passes ['space'] as player move
 - takeBack: passes ['b'] as player move
+- newGame: sends new-game event to server
 
 drawFunctions.js (design inspired by big2-ai.herokuapp.com/game/)
 - constructor: sets variables for various dimensions
@@ -54,6 +55,7 @@ Event Listeners:
 - connected: detects when a new user is connected and assigns user ID
 - make-move: handles moves sent by players
 - data-query: sends back game data in response to queries from users
+- new-game:
 
 Functions:
 - start_game: starts the game

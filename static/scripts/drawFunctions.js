@@ -63,7 +63,7 @@ class Drawer {
       card.style.visibility = "visible";
       card.style.zIndex = String(i);
       card.id = String(i);
-      card.innerHTML = ("<img src='/static/cards_png/" + String(myHand[i]) + ".png' width='"
+      card.innerHTML = ("<img src=\"{{ url_for('static', filename='cards_png/" + String(myHand[i]) + ".png' width='"
                   + String(this.cardWidth) + "' height='" + String(this.cardHeight) + "'/>");
       document.body.appendChild(card);
     }
@@ -71,9 +71,9 @@ class Drawer {
 
   drawOpponents() {
     const backOfCard = new Image();
-    backOfCard.src = '/static/cards_png/back.jpg';
+    backOfCard.src = "{{ url_for('static', filename='cards_png/back.jpg') }}";
     const backOfCardHor = new Image();
-    backOfCardHor.src = '/static/cards_png/back-hor.jpg';
+    backOfCardHor.src = "{{ url_for('static', filename='cards_png/back-hor.jpg') }}";
     // right
     let handLen = this.data[(this.userID + 1) % 4][0].length;
     for (var i = 0; i < handLen; i++) {
@@ -97,7 +97,6 @@ class Drawer {
       this.ctx.drawImage(backOfCardHor, xPos, yPos, this.backHeight, this.backWidth);
     }
   }
-
   drawPlayed() {
     const playedCard = new Image();
     // player
@@ -106,7 +105,7 @@ class Drawer {
       const xPos = (this.boardWidth - (played.length - 1)*this.backDelta
                           - this.backWidth)/2 + i*this.backDelta;
       const yPos = this.cardY - this.turnRadius - this.playedDelta - this.backHeight;
-      playedCard.src = `/static/cards_png/${played[i]}.png`;
+      playedCard.src = `{{ url_for('static', filename='cards_png/${played[i]}.png') }}`;
       this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
     }
     // right
@@ -115,7 +114,7 @@ class Drawer {
       const xPos = this.boardWidth - this.backHeight - (played.length - 1)*this.backDelta - this.backWidth
                   - this.turnRadius - this.playedDelta + i*this.backDelta;
       const yPos = (this.backHeight + this.cardY - this.backHeight)/2;
-      playedCard.src = `/static/cards_png/${played[i]}.png`;
+      playedCard.src = `{{ url_for('static', filename='cards_png/${played[i]}.png') }}`;
       this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
     }
     // across
@@ -124,7 +123,7 @@ class Drawer {
       const xPos = (this.boardWidth - (played.length - 1)*this.backDelta
                           - this.backWidth)/2 + i*this.backDelta;
       const yPos = this.backHeight + this.turnRadius + this.playedDelta;
-      playedCard.src = `/static/cards_png/${played[i]}.png`;
+      playedCard.src = `{{ url_for('static', filename='cards_png/${played[i]}.png') }}`;
       this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
     }
     // left
@@ -132,7 +131,7 @@ class Drawer {
     for (var i = 0; i < played.length; i++) {
       const xPos = this.backHeight + this.turnRadius + this.playedDelta + i*this.backDelta;
       const yPos = (this.backHeight + this.cardY - this.backHeight)/2;
-      playedCard.src = `/static/cards_png/${played[i]}.png`;
+      playedCard.src = `{{ url_for('static', filename='cards_png/${played[i]}.png') }}`;
       this.ctx.drawImage(playedCard, xPos, yPos, this.backWidth, this.backHeight);
     }
   }
@@ -150,7 +149,7 @@ class Drawer {
   drawDeck() {
     if (this.data['di_pai']) {
       const backOfCard = new Image();
-      backOfCard.src = '/static/cards_png/back.jpg';
+      backOfCard.src = "{{ url_for('static', filename='cards_png/back.jpg') }}";
       this.ctx.drawImage(backOfCard, 55, 570, this.backWidth, this.backHeight);
     }
   }
@@ -160,5 +159,12 @@ class Drawer {
     scoreText.innerHTML = "Attacker points: " + String(this.data['attacker_points']);
     const suitText = document.getElementById('trump-suit');
     suitText.innerHTML = "Trump suit: " + String(this.data['trump_suit']);
+  }
+
+  drawNewGame() {
+    ctx.font = "42px Comic Sans MS";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText("Refresh the page to join new game!", this.boardWidth/2, this.boardHeight/2);
   }
 }

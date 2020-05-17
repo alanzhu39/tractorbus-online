@@ -49,6 +49,12 @@ def make_move(move_data):
 def data_query(_):
     emit('game-data', r.get_data())
 
+@socketio.on('new-game')
+def new_game(data):
+    global num_conns
+    num_conns = 0
+    emit('new-game', 'new game!', broadcast=True)
+
 def start_game():
     global r
     sheng_order = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']

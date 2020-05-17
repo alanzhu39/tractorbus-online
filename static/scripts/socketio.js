@@ -32,6 +32,10 @@ socket.on('test-event', (data) => {
   console.log(data);
 });
 
+socket.on('new-game', (data) => {
+  myDrawer.drawNewGame();
+});
+
 function testFunc() {
   const testData = {0: [['2C','2D','2H','2S','3C','3D','3H','3S','4C','4D','4H','4S',
       '5C','5D','5H','5S','6C','6D','6H','6S','7C','7D','7H','7S','8C'], ['8D', '8H']],
@@ -48,12 +52,7 @@ function testFunc() {
 }
 
 function testDraw() {
-  const context = document.getElementById('gameCanvas').getContext('2d');
-  const backOfCard = new Image();
-  backOfCard.src = '/static/cards_png/back.jpg';
-  context.drawImage(backOfCard, 0, 0, 68, 100);
-  backOfCard.src = '/static/cards_png/2C.png';
-  context.drawImage(backOfCard, 200, 0, 85, 125);
+
 }
 
 function testClearCards() {
@@ -95,4 +94,8 @@ function passButton() {
 function takeBack() {
   socket.emit('make-move', {'userID': userID,
                             'selection': ['b']});
+}
+
+function newGame() {
+  socket.emit('new-game', 'new game!');
 }
