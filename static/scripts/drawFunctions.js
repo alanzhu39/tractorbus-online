@@ -162,9 +162,9 @@ class Drawer {
   }
 
   drawNewGame() {
-    ctx.font = "42px Comic Sans MS";
-    ctx.fillStyle = "red";
-    ctx.textAlign = "center";
-    ctx.fillText("Refresh the page to join new game!", this.boardWidth/2, this.boardHeight/2);
+    this.ctx.font = "42px Comic Sans MS";
+    this.ctx.fillStyle = "red";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("Refresh the page to join new game!", this.boardWidth/2, this.boardHeight/2);
   }
 }
