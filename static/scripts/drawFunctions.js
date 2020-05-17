@@ -63,7 +63,7 @@ class Drawer {
       card.style.visibility = "visible";
       card.style.zIndex = String(i);
       card.id = String(i);
-      card.innerHTML = ("<img src=\"{{ url_for('static', filename='cards_png/" + String(myHand[i]) + ".png' width='"
+      card.innerHTML = ("<img src=\"{{ url_for('static', filename='cards_png/" + String(myHand[i]) + ".png') }}\"' width='"
                   + String(this.cardWidth) + "' height='" + String(this.cardHeight) + "'/>");
       document.body.appendChild(card);
     }
