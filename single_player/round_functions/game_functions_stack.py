@@ -115,19 +115,19 @@ def liang_query(self, current_drawer):
         if len(response) == 1:
             if response[0].get_rank() == self.players[0].get_trump_rank() and self.trump_suit_cnt < 1:
                 self.trump_suit = response[0].get_suit()
-                self.cards_played[current_drawer].append(response)
+                self.cards_played[current_drawer].extend(response)
                 self.trump_suit_cnt = 1
                 return 'space'
         elif len(response) == 2:
             if response[0] == response[1]:
                 if response[0].get_rank() == self.players[0].get_trump_rank() and self.trump_suit_cnt < 2:
                     self.trump_suit = response[0].get_suit()
-                    self.cards_played[current_drawer].append(response)
+                    self.cards_played[current_drawer].extend(response)
                     self.trump_suit_cnt = 2
                     return 'space'
                 elif response[0].get_is_joker():
                     self.trump_suit = 'wu zhu'
-                    self.cards_played[current_drawer].append(response)
+                    self.cards_played[current_drawer].extend(response)
                     self.trump_suit_cnt = 3
                     return 'space'
                 else:
