@@ -1,7 +1,12 @@
 # Tractorbus Online
-An online multiplayer client for playing the card game [Tractor](https://www.pagat.com/kt5/tractor.html). Visit http://tractor39.herokuapp.com/ to try it out yourself! (It might take a few seconds to load).
+An online multiplayer client for playing the card game [Tractor](https://www.pagat.com/kt5/tractor.html). Visit http://tractor39.herokuapp.com/ to try it out yourself! Make sure you have three other players with you on the website.
 ## Game Logic
-Backend code was written in collaboration with Andrew Zhang, Adam Zheng, and Raymond Li. A version of the game built with Pygame can be found at https://github.com/adamczheng/tractor-client. All game logic was written using Python.
+Backend code was written in collaboration with
+* Andrew Zhang (https://github.com/andrewzhang2001)
+* Adam Zheng (https://github.com/adamczheng)  
+* Raymond Li  (https://github.com/flyingtacov42)   
+
+A version of the game built with Pygame can be found at https://github.com/adamczheng/tractor-client. All game logic was written using Python.
 ## GUI
 Frontend code was done with Javascript and basic CSS. The user interface was inspired by Henry Charlesworth's Big 2 client (https://github.com/henrycharlesworth/big2_PPOalgorithm). Flask-SocketIO was used for networking to handle user inputs and synchronize multiplayer gameplay.
 ## Gameplay
@@ -10,6 +15,16 @@ Frontend code was done with Javascript and basic CSS. The user interface was ins
 Four players must be on the website http://tractor39.herokuapp.com/ to start a game.
 In this demo, we have four unique players on each tab.
 
+#### Drawing Cards
+
+*Each player takes turns drawing card and then clicking the pass button.*  
+<img src="https://i.gyazo.com/5ffcca112c4d341a55efd7814a0fd20e.gif" width=600>
+***
+*A player can declare the trump suit by selecting the valid Trump Rank (in this case, 2), and clicking play.*
+*The bottom right will update the trump suit for the game.*
+<img src="https://i.gyazo.com/bbb37624a93771d426692dd11ba506f8.gif" width=600>
+
+### Playing Hands
 *We can select and play a card by clicking on the sprite. Here, our player wants to play 10 &spadesuit; .*  
 *We can also see Player 2's perspective is updated to reflect the board from his point of view.*  
 <img src="https://gyazo.com/4ba789c89a3381e8d88853df8801bff9.gif" width="600">
